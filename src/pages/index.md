@@ -6,17 +6,17 @@ description: Cache every single thing your app could ever do ahead of time, so y
 
 Learn how to get CacheAdvance set up in your project in under thirty minutes or it's free. {% .lead %}
 
-{% link-grid %}
+{% linkGrid %}
 
-{% link-grid-link title="Installation" icon="installation" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
+{% linkGridLink title="Installation" icon="installation" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
 
-{% link-grid-link title="Architecture guide" icon="presets" href="/" description="Learn how the internals work and contribute." /%}
+{% linkGridLink title="Architecture guide" icon="presets" href="/" description="Learn how the internals work and contribute." /%}
 
-{% link-grid-link title="Plugins" icon="plugins" href="/" description="Extend the library with third-party plugins or write your own." /%}
+{% linkGridLink title="Plugins" icon="plugins" href="/" description="Extend the library with third-party plugins or write your own." /%}
 
-{% link-grid-link title="API reference" icon="theming" href="/" description="Learn to easily customize and modify your app's visual design to fit your brand." /%}
+{% linkGridLink title="API reference" icon="theming" href="/" description="Learn to easily customize and modify your app's visual design to fit your brand." /%}
 
-{% /link-grid %}
+{% /linkGrid %}
 
 Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste.
 
