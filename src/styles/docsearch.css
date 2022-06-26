@@ -322,7 +322,7 @@
 
 .DocSearch-Hit-action {
   color: var(--docsearch-action-color);
-  stroke-width: 2;
+  strokewidth: 2;
 }
 
 .DocSearch-Hit-action + .DocSearch-Hit-action {

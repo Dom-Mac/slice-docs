@@ -56,7 +56,7 @@ function Header({ navigation }: HeaderProps) {
           <a className="flex items-center w-10 overflow-hidden lg:w-auto">
             <span className="sr-only">Home page</span>
             <Logo />
-            <p className="hidden pl-4 text-lg text-slate-400 lg:block ">
+            <p className="hidden pl-4 text-lg text-slate-600 dark:text-slate-200 lg:block ">
               <span className="font-black">Slice</span> docs
             </p>
           </a>

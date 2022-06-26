@@ -22,7 +22,7 @@ Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit per
 
 ---
 
-## Quick start
+## _Quick start_
 
 Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.
 
