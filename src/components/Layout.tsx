@@ -11,6 +11,7 @@ import { Prose } from '@/components/Prose'
 import { Search } from '@/components/Search'
 import { ThemeSelector } from '@/components/ThemeSelector'
 import { MarkdocNode, NavigationType } from '@/pages/_app'
+import Footer from './Footer'
 
 type HeaderProps = {
   navigation: NavigationType
@@ -56,7 +57,7 @@ function Header({ navigation }: HeaderProps) {
           <a className="flex items-center w-10 overflow-hidden lg:w-auto">
             <span className="sr-only">Home page</span>
             <Logo />
-            <p className="hidden pl-4 text-lg text-slate-600 dark:text-slate-200 lg:block ">
+            <p className="hidden pl-4 text-lg text-slate-700 dark:text-slate-100 lg:block ">
               <span className="font-black">Slice</span> docs
             </p>
           </a>
@@ -231,6 +232,7 @@ export function Layout({
           </nav>
         </div>
       </div>
+      <Footer />
     </>
   )
 }

@@ -1,3 +1,12 @@
+:root {
+  --black: #0f1115;
+  --white: #fff;
+}
+.dark {
+  --black: #fff;
+  --white: #0f1115;
+}
+
 figcaption {
   padding-top: 0.5rem;
   text-align: center;
