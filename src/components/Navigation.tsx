@@ -1,8 +1,14 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
+import { NavigationType } from '@/pages/_app'
 
-export function Navigation({ navigation, className }) {
+type Props = {
+  navigation: NavigationType
+  className?: string
+}
+
+export function Navigation({ navigation, className }: Props) {
   let router = useRouter()
 
   return (
@@ -10,7 +16,7 @@ export function Navigation({ navigation, className }) {
       <ul className="space-y-9">
         {navigation.map((section) => (
           <li key={section.title}>
-            <h2 className="font-display font-medium text-slate-900 dark:text-white">
+            <h2 className="font-medium font-display text-slate-900 dark:text-white">
               {section.title}
             </h2>
             <ul className="mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200">

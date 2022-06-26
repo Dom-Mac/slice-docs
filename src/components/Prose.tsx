@@ -1,8 +1,14 @@
 import clsx from 'clsx'
 
-export function Prose({ as: Component = 'div', className, ...props }) {
+type Props = {
+  children?: JSX.Element | string
+  className?: string
+  [x: string]: any
+}
+
+export function Prose({ className = '', ...props }: Props) {
   return (
-    <Component
+    <div
       className={clsx(
         className,
         'prose prose-slate max-w-none dark:prose-invert dark:text-slate-400',

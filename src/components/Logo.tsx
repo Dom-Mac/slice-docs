@@ -4,7 +4,7 @@ export function Logo() {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 227 36"
-      className="h-9 w-auto fill-slate-700 dark:fill-sky-100"
+      className="w-auto h-9 fill-slate-700 dark:fill-sky-100"
     >
       <path
         fill="none"

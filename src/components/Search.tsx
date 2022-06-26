@@ -1,8 +1,12 @@
-import { useCallback, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import Router from 'next/router'
 import { DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react'
+import {
+  InternalDocSearchHit,
+  StoredDocSearchHit,
+} from '@docsearch/react/dist/esm/types'
 
 const docSearchConfig = {
   appId: process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID,
@@ -10,7 +14,12 @@ const docSearchConfig = {
   indexName: process.env.NEXT_PUBLIC_DOCSEARCH_INDEX_NAME,
 }
 
-function Hit({ hit, children }) {
+type Props = {
+  hit: InternalDocSearchHit | StoredDocSearchHit
+  children: ReactNode
+}
+
+function Hit({ hit, children }: Props) {
   return (
     <Link href={hit.url}>
       <a>{children}</a>
@@ -20,7 +29,7 @@ function Hit({ hit, children }) {
 
 export function Search() {
   let [isOpen, setIsOpen] = useState(false)
-  let [modifierKey, setModifierKey] = useState()
+  let [modifierKey, setModifierKey] = useState<'⌘' | 'Ctrl '>()
 
   const onOpen = useCallback(() => {
     setIsOpen(true)
@@ -47,7 +56,7 @@ export function Search() {
       >
         <svg
           aria-hidden="true"
-          className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400"
+          className="flex-none w-5 h-5 fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400"
         >
           <path d="M16.293 17.707a1 1 0 0 0 1.414-1.414l-1.414 1.414ZM9 14a5 5 0 0 1-5-5H2a7 7 0 0 0 7 7v-2ZM4 9a5 5 0 0 1 5-5V2a7 7 0 0 0-7 7h2Zm5-5a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7v2Zm8.707 12.293-3.757-3.757-1.414 1.414 3.757 3.757 1.414-1.414ZM14 9a4.98 4.98 0 0 1-1.464 3.536l1.414 1.414A6.98 6.98 0 0 0 16 9h-2Zm-1.464 3.536A4.98 4.98 0 0 1 9 14v2a6.98 6.98 0 0 0 4.95-2.05l-1.414-1.414Z" />
         </svg>
@@ -55,7 +64,7 @@ export function Search() {
           Search docs
         </span>
         {modifierKey && (
-          <kbd className="ml-auto hidden font-medium text-slate-400 dark:text-slate-500 md:block">
+          <kbd className="hidden ml-auto font-medium text-slate-400 dark:text-slate-500 md:block">
             <kbd className="font-sans">{modifierKey}</kbd>
             <kbd className="font-sans">K</kbd>
           </kbd>
@@ -63,6 +72,7 @@ export function Search() {
       </button>
       {isOpen &&
         createPortal(
+          // @ts-ignore
           <DocSearchModal
             {...docSearchConfig}
             initialScrollY={window.scrollY}

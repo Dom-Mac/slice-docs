@@ -8,6 +8,28 @@ import { PresetsIcon } from '@/components/icons/PresetsIcon'
 import { ThemingIcon } from '@/components/icons/ThemingIcon'
 import { WarningIcon } from '@/components/icons/WarningIcon'
 
+export type IconType =
+  | 'installation'
+  | 'presets'
+  | 'plugins'
+  | 'theming'
+  | 'lightbulb'
+  | 'warning'
+
+export type ColorType = 'blue' | 'amber'
+
+export type Icon = {
+  id: string
+  color: ColorType
+}
+
+type Props = {
+  icon: IconType
+  className?: string
+  color?: ColorType
+  [x: string]: any
+}
+
 const icons = {
   installation: InstallationIcon,
   presets: PresetsIcon,
@@ -23,7 +45,12 @@ const iconStyles = {
     '[--icon-foreground:theme(colors.amber.900)] [--icon-background:theme(colors.amber.100)]',
 }
 
-export function Icon({ color = 'blue', icon, className, ...props }) {
+export function Icon({
+  color = 'blue',
+  icon,
+  className = '',
+  ...props
+}: Props) {
   let id = useId()
   let IconComponent = icons[icon]
 
@@ -52,7 +79,13 @@ const gradients = {
   ],
 }
 
-export function Gradient({ color = 'blue', ...props }) {
+export function Gradient({
+  color = 'blue',
+  ...props
+}: {
+  color?: 'blue' | 'amber'
+  [x: string]: any
+}) {
   return (
     <radialGradient
       cx={0}
@@ -61,17 +94,34 @@ export function Gradient({ color = 'blue', ...props }) {
       gradientUnits="userSpaceOnUse"
       {...props}
     >
-      {gradients[color].map((stop, index) => (
-        <stop key={index} {...stop} />
-      ))}
+      {gradients[color].map(
+        (
+          stop: { stopColor: string; offset?: string | number },
+          index: number
+        ) => (
+          <stop key={index} {...stop} />
+        )
+      )}
     </radialGradient>
   )
 }
 
-export function LightMode({ className, ...props }) {
+export function LightMode({
+  className = '',
+  ...props
+}: {
+  className?: string
+  [x: string]: any
+}) {
   return <g className={clsx('dark:hidden', className)} {...props} />
 }
 
-export function DarkMode({ className, ...props }) {
+export function DarkMode({
+  className = '',
+  ...props
+}: {
+  className?: string
+  [x: string]: any
+}) {
   return <g className={clsx('hidden dark:inline', className)} {...props} />
 }

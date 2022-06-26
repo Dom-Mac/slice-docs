@@ -1,10 +1,25 @@
+import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { slugifyWithCounter } from '@sindresorhus/slugify'
-
 import { Layout } from '@/components/Layout'
 
 import 'focus-visible'
 import '@/styles/tailwind.css'
+
+export type MarkdocNode = {
+  attributes: any
+  title: string
+  children: any
+  id?: string
+}
+
+export type NavigationType = {
+  title: string
+  links: {
+    title: string
+    href: string
+  }[]
+}[]
 
 const navigation = [
   {
@@ -63,7 +78,7 @@ const navigation = [
   },
 ]
 
-function getNodeText(node) {
+function getNodeText(node: any) {
   let text = ''
   for (let child of node.children ?? []) {
     if (typeof child === 'string') {
@@ -74,7 +89,10 @@ function getNodeText(node) {
   return text
 }
 
-function collectHeadings(nodes, slugify = slugifyWithCounter()) {
+function collectHeadings(
+  nodes: any[],
+  slugify = slugifyWithCounter()
+): MarkdocNode[] {
   let sections = []
 
   for (let node of nodes) {
@@ -100,14 +118,14 @@ function collectHeadings(nodes, slugify = slugifyWithCounter()) {
   return sections
 }
 
-export default function App({ Component, pageProps }) {
-  let title = pageProps.markdoc?.frontmatter.title
+export default function App({ Component, pageProps }: AppProps) {
+  let title: string = pageProps.markdoc?.frontmatter.title
 
-  let pageTitle =
+  let pageTitle: string =
     pageProps.markdoc?.frontmatter.pageTitle ||
     `${pageProps.markdoc?.frontmatter.title} - Docs`
 
-  let description = pageProps.markdoc?.frontmatter.description
+  let description: string = pageProps.markdoc?.frontmatter.description
 
   let tableOfContents = pageProps.markdoc?.content
     ? collectHeadings(pageProps.markdoc.content)

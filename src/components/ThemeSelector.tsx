@@ -2,13 +2,25 @@ import { useEffect, useState } from 'react'
 import { Listbox } from '@headlessui/react'
 import clsx from 'clsx'
 
+type Theme = {
+  name: string
+  value: string
+  icon: (props: any) => JSX.Element
+}
+
 const themes = [
   { name: 'Light', value: 'light', icon: LightIcon },
   { name: 'Dark', value: 'dark', icon: DarkIcon },
   { name: 'System', value: 'system', icon: SystemIcon },
 ]
 
-function IconBase({ children, ...props }) {
+function IconBase({
+  children,
+  ...props
+}: {
+  children: JSX.Element
+  [x: string]: any
+}) {
   return (
     <svg aria-hidden="true" viewBox="0 0 16 16" {...props}>
       {children}
@@ -16,7 +28,7 @@ function IconBase({ children, ...props }) {
   )
 }
 
-function LightIcon(props) {
+function LightIcon(props: { [x: string]: any }) {
   return (
     <IconBase {...props}>
       <path
@@ -28,7 +40,7 @@ function LightIcon(props) {
   )
 }
 
-function DarkIcon(props) {
+function DarkIcon(props: { [x: string]: any }) {
   return (
     <IconBase {...props}>
       <path
@@ -40,7 +52,7 @@ function DarkIcon(props) {
   )
 }
 
-function SystemIcon(props) {
+function SystemIcon(props: { [x: string]: any }) {
   return (
     <IconBase {...props}>
       <path
@@ -52,8 +64,8 @@ function SystemIcon(props) {
   )
 }
 
-export function ThemeSelector(props) {
-  let [selectedTheme, setSelectedTheme] = useState()
+export function ThemeSelector(props: { [x: string]: any }) {
+  let [selectedTheme, setSelectedTheme] = useState<Theme>()
 
   useEffect(() => {
     if (selectedTheme) {
@@ -76,14 +88,14 @@ export function ThemeSelector(props) {
       {...props}
     >
       <Listbox.Label className="sr-only">Theme</Listbox.Label>
-      <Listbox.Button className="flex h-6 w-6 items-center justify-center rounded-lg shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
+      <Listbox.Button className="flex items-center justify-center w-6 h-6 rounded-lg shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
         <span className="sr-only">{selectedTheme?.name}</span>
         <LightIcon className="hidden h-4 w-4 fill-sky-400 [[data-theme=light]_&]:block" />
         <DarkIcon className="hidden h-4 w-4 fill-sky-400 [[data-theme=dark]_&]:block" />
         <LightIcon className="hidden h-4 w-4 fill-slate-400 [:not(.dark)[data-theme=system]_&]:block" />
         <DarkIcon className="hidden h-4 w-4 fill-slate-400 [.dark[data-theme=system]_&]:block" />
       </Listbox.Button>
-      <Listbox.Options className="absolute top-full left-1/2 mt-3 w-36 -translate-x-1/2 space-y-1 rounded-xl bg-white p-3 text-sm font-medium shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
+      <Listbox.Options className="absolute p-3 mt-3 space-y-1 text-sm font-medium -translate-x-1/2 bg-white shadow-md top-full left-1/2 w-36 rounded-xl shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
         {themes.map((theme) => (
           <Listbox.Option
             key={theme.value}
@@ -102,7 +114,7 @@ export function ThemeSelector(props) {
           >
             {({ selected }) => (
               <>
-                <div className="rounded-md bg-white p-1 shadow ring-1 ring-slate-900/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
+                <div className="p-1 bg-white rounded-md shadow ring-1 ring-slate-900/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
                   <theme.icon
                     className={clsx('h-4 w-4', {
                       'fill-sky-400 dark:fill-sky-400': selected,

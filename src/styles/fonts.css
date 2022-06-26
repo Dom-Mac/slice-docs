@@ -1,9 +1,74 @@
 @font-face {
-  font-family: 'Lexend';
+  font-family: 'Rubik';
+  font-weight: 400;
+  font-display: block;
   font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url(/fonts/lexend.woff2) format('woff2');
+  font-named-instance: 'Regular';
+  src: url('/fonts/Rubik-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-weight: 500;
+  font-display: block;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url('/fonts/Rubik-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-weight: 600;
+  font-display: block;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url('/fonts/Rubik-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-weight: 700;
+  font-display: block;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url('/fonts/Rubik-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-weight: 900;
+  font-display: block;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url('/fonts/Rubik-Black.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-weight: 400;
+  font-display: block;
+  font-style: normal;
+  font-named-instance: 'Italic';
+  src: url('/fonts/Rubik-Italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-weight: 500;
+  font-display: block;
+  font-style: normal;
+  font-named-instance: 'Italic';
+  src: url('/fonts/Rubik-MediumItalic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-weight: 600;
+  font-display: block;
+  font-style: normal;
+  font-named-instance: 'Italic';
+  src: url('/fonts/Rubik-SemiBoldItalic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-weight: 700;
+  font-display: block;
+  font-style: normal;
+  font-named-instance: 'Italic';
+  src: url('/fonts/Rubik-BoldItalic.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Inter';

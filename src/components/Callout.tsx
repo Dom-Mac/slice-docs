@@ -1,6 +1,13 @@
 import clsx from 'clsx'
 
 import { Icon } from '@/components/Icon'
+import { ReactNode } from 'react'
+
+type Props = {
+  type: 'note' | 'warning' | 'caution' | 'check'
+  title: string
+  children: ReactNode
+}
 
 const styles = {
   note: {
@@ -15,14 +22,18 @@ const styles = {
     title: 'text-amber-900 dark:text-amber-500',
     body: 'text-amber-800 prose-code:text-amber-900 prose-a:text-amber-900 [--tw-prose-underline:theme(colors.amber.400)] dark:[--tw-prose-underline:theme(colors.sky.700)] [--tw-prose-background:theme(colors.amber.50)] dark:text-slate-300 dark:prose-code:text-slate-300',
   },
+  caution: { container: '', title: '', body: '' },
+  check: { container: '', title: '', body: '' },
 }
 
 const icons = {
-  note: (props) => <Icon icon="lightbulb" {...props} />,
-  warning: (props) => <Icon icon="warning" color="amber" {...props} />,
+  note: (props: any) => <Icon icon="lightbulb" {...props} />,
+  warning: (props: any) => <Icon icon="warning" color="amber" {...props} />,
+  caution: (props: any) => null,
+  check: (props: any) => null,
 }
 
-export function Callout({ type = 'note', title, children }) {
+export function Callout({ type = 'note', title, children }: Props) {
   let IconComponent = icons[type]
 
   return (

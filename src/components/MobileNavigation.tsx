@@ -5,8 +5,13 @@ import { Dialog } from '@headlessui/react'
 
 import { Logo } from '@/components/Logo'
 import { Navigation } from '@/components/Navigation'
+import { NavigationType } from '@/pages/_app'
 
-export function MobileNavigation({ navigation }) {
+export function MobileNavigation({
+  navigation,
+}: {
+  navigation: NavigationType
+}) {
   let router = useRouter()
   let [isOpen, setIsOpen] = useState(false)
 
@@ -36,7 +41,7 @@ export function MobileNavigation({ navigation }) {
         <span className="sr-only">Open navigation</span>
         <svg
           aria-hidden="true"
-          className="h-6 w-6 stroke-slate-500"
+          className="w-6 h-6 stroke-slate-500"
           fill="none"
           strokeWidth="2"
           strokeLinecap="round"
@@ -47,16 +52,16 @@ export function MobileNavigation({ navigation }) {
       <Dialog
         open={isOpen}
         onClose={setIsOpen}
-        className="fixed inset-0 z-50 flex items-start overflow-y-auto bg-slate-900/50 pr-10 backdrop-blur lg:hidden"
+        className="fixed inset-0 z-50 flex items-start pr-10 overflow-y-auto bg-slate-900/50 backdrop-blur lg:hidden"
       >
-        <Dialog.Panel className="min-h-full w-full max-w-xs bg-white px-4 pt-5 pb-12 dark:bg-slate-900 sm:px-6">
+        <Dialog.Panel className="w-full max-w-xs min-h-full px-4 pt-5 pb-12 bg-white dark:bg-slate-900 sm:px-6">
           <Dialog.Title className="sr-only">Navigation</Dialog.Title>
           <div className="flex items-center">
             <button type="button" onClick={() => setIsOpen(false)}>
               <span className="sr-only">Close navigation</span>
               <svg
                 aria-hidden="true"
-                className="h-6 w-6 stroke-slate-500"
+                className="w-6 h-6 stroke-slate-500"
                 fill="none"
                 strokeWidth="2"
                 strokeLinecap="round"
@@ -65,13 +70,13 @@ export function MobileNavigation({ navigation }) {
               </svg>
             </button>
             <Link href="/">
-              <a className="ml-6 block w-10 overflow-hidden lg:w-auto">
+              <a className="block w-10 ml-6 overflow-hidden lg:w-auto">
                 <span className="sr-only">Home page</span>
                 <Logo />
               </a>
             </Link>
           </div>
-          <Navigation navigation={navigation} className="mt-5 px-1" />
+          <Navigation navigation={navigation} className="px-1 mt-5" />
         </Dialog.Panel>
       </Dialog>
     </>
