@@ -7,22 +7,85 @@ import { ButtonLink } from '@/components/Button'
 import { HeroBackground } from '@/components/HeroBackground'
 import blurCyanImage from '@/images/blur-cyan.png'
 import blurIndigoImage from '@/images/blur-indigo.png'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 const codeLanguage = 'javascript'
-const code = `export default {
-  strategy: 'predictive',
-  engine: {
-    cpus: 12,
-    backups: ['./storage/cache.wtf'],
-  },
-}`
-
-const tabs = [
-  { name: 'cache-advance.config.js', isActive: true },
-  { name: 'package.json', isActive: false },
-]
 
 export function Hero() {
+  const [activeTab, setActiveTab] = useState(0)
+  const [count, setCount] = useState(0)
+  const rotatingText = [
+    [
+      'downloadContent',
+      'mintNFT',
+      'subscribe',
+      'getInvite',
+      'accessEvent',
+      'orderItem',
+      'loginApp',
+      'bookStay',
+    ],
+    [
+      'mintTokens',
+      'allowlistedMint',
+      'tokenGatedMint',
+      'transferNFTs',
+      'swapTokens',
+      'storeAdditionalInfo',
+      'callExternalProtocol',
+      'doSomethingCool',
+    ],
+  ]
+
+  const tabs = [
+    {
+      name: 'myApp.tsx',
+      isActive: activeTab == 0,
+      code: `const purchases = usePurchases(
+  account, 
+  slicerId, 
+  productId
+)
+
+if (purchases > 0) {
+  ${rotatingText[0][count]}()
+}`,
+    },
+    {
+      name: 'myPurchaseHook.sol',
+      isActive: activeTab == 1,
+      code: `contract MyPurchaseHook is SlicerPurchasable {
+  function onProductPurchase(
+    // params
+  ) public payable override onlyOnPurchaseFrom(slicerId) {
+    // Check if buyer is allowed to purchase
+    if (!isPurchaseAllowed(
+        // params
+      )
+    ) revert NotAllowed();
+
+    // Execute any on-chain logic upon purchase
+    ${rotatingText[1][count]}()
+  }
+}`,
+    },
+    { name: 'SliceCore.sol', isActive: false },
+    { name: 'ProductsModule.sol', isActive: false },
+    // { name: 'Slicer.sol', isActive: false },
+    // { name: 'FundsModule.sol', isActive: false },
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((count) => (count == rotatingText[0].length - 1 ? 0 : count + 1))
+    }, 1300)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
   return (
     <div className="overflow-hidden bg-slate-900 dark:-mb-32 dark:-mt-[4.5rem] dark:pb-32 dark:pt-[4.5rem] dark:lg:-mt-[4.75rem] dark:lg:pt-[4.75rem]">
       <div className="py-16 sm:px-2 lg:relative lg:py-20 lg:px-0">
@@ -41,11 +104,11 @@ export function Hero() {
             </div>
             <div className="relative">
               <p className="inline text-5xl tracking-tight text-transparent bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text font-display">
-                Never miss the cache again.
+                Build on decentralized commerce.
               </p>
               <p className="mt-3 text-2xl tracking-tight text-slate-400">
-                Cache every single thing your app could ever do ahead of time,
-                so your code never even has to run at all.
+                Interact with d-stores or extend them with custom apps and
+                purchase hooks built on top of the Slice protocol.
               </p>
               <div className="flex mt-8 space-x-4 md:justify-center lg:justify-start">
                 <ButtonLink href="/">Get started</ButtonLink>
@@ -97,15 +160,18 @@ export function Hero() {
                     <circle cx="21" cy="5" r="4.5" />
                     <circle cx="37" cy="5" r="4.5" />
                   </svg>
-                  <div className="flex mt-4 space-x-2 text-xs">
-                    {tabs.map((tab) => (
+                  <div className="flex mt-4 space-x-2 overflow-hidden text-xs">
+                    {tabs.map((tab, id) => (
                       <div
                         key={tab.name}
                         className={clsx('flex h-6 rounded-full', {
                           'bg-gradient-to-r from-sky-400/30 via-sky-400 to-sky-400/30 p-px font-medium text-sky-300':
                             tab.isActive,
                           'text-slate-500': !tab.isActive,
+                          'cursor-pointer text-sky-500 hover:text-sky-400':
+                            tab.code && !tab.isActive,
                         })}
+                        onClick={() => setActiveTab(id)}
                       >
                         <div
                           className={clsx(
@@ -124,7 +190,7 @@ export function Hero() {
                       className="pr-4 font-mono border-r select-none border-slate-300/5 text-slate-600"
                     >
                       {Array.from({
-                        length: code.split('\n').length,
+                        length: tabs[activeTab].code?.split('\n').length || 0,
                       }).map((_, index) => (
                         <Fragment key={index}>
                           {(index + 1).toString().padStart(2, '0')}
@@ -134,7 +200,7 @@ export function Hero() {
                     </div>
                     <Highlight
                       {...defaultProps}
-                      code={code}
+                      code={tabs[activeTab].code || ''}
                       language={codeLanguage}
                       theme={undefined}
                     >
