@@ -17,22 +17,22 @@ export function Hero() {
   const [count, setCount] = useState(0)
   const rotatingText = [
     [
-      'downloadContent',
-      'mintNFT',
       'subscribe',
-      'getInvite',
       'accessEvent',
       'orderItem',
       'loginApp',
+      'getInvite',
+      'downloadContent',
+      'mintNFT',
       'bookStay',
     ],
     [
-      'mintTokens',
-      'allowlistedMint',
       'tokenGatedMint',
       'transferNFTs',
       'swapTokens',
       'storeAdditionalInfo',
+      'mintTokens',
+      'allowlistedMint',
       'callExternalProtocol',
       'doSomethingCool',
     ],
@@ -42,14 +42,16 @@ export function Hero() {
     {
       name: 'myApp.tsx',
       isActive: activeTab == 0,
-      code: `const purchases = usePurchases(
+      code: `// Get product purchases of an account
+const purchases = usePurchases(
   account, 
   slicerId, 
   productId
 )
 
-const myFunction = () => {
+const validatePurchase = () => {
   if (purchases > 0) {
+    // Execute custom logic
     ${rotatingText[0][count]}()
   }
 }`,
@@ -59,7 +61,7 @@ const myFunction = () => {
       isActive: activeTab == 1,
       code: `contract MyPurchaseHook is SlicerPurchasable {
   function onProductPurchase(
-    // params
+    /* params */
   ) public payable override onlyOnPurchaseFrom(slicerId) {
     // Check if buyer is allowed to purchase
     if (
@@ -67,7 +69,7 @@ const myFunction = () => {
     ) revert NotAllowed();
 
     // Execute any on-chain logic upon purchase
-    ${rotatingText[1][count]}()
+    ${rotatingText[1][count]}(buyer, quantity)
   }
 }`,
     },
