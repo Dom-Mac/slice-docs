@@ -48,8 +48,10 @@ export function Hero() {
   productId
 )
 
-if (purchases > 0) {
-  ${rotatingText[0][count]}()
+const myFunction = () => {
+  if (purchases > 0) {
+    ${rotatingText[0][count]}()
+  }
 }`,
     },
     {
@@ -60,9 +62,8 @@ if (purchases > 0) {
     // params
   ) public payable override onlyOnPurchaseFrom(slicerId) {
     // Check if buyer is allowed to purchase
-    if (!isPurchaseAllowed(
-        // params
-      )
+    if (
+      !isPurchaseAllowed( /* params */ )
     ) revert NotAllowed();
 
     // Execute any on-chain logic upon purchase
@@ -72,8 +73,6 @@ if (purchases > 0) {
     },
     { name: 'SliceCore.sol', isActive: false },
     { name: 'ProductsModule.sol', isActive: false },
-    // { name: 'Slicer.sol', isActive: false },
-    // { name: 'FundsModule.sol', isActive: false },
   ]
 
   useEffect(() => {
